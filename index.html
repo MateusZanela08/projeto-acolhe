@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>Projeto Acolhe | Projeto SENAC</title>
+  <meta name="description" content="Projeto Acolhe: entenda o El Niño, saiba como se proteger e doe roupas e cobertas na Grande Florianópolis.">
+  <link rel="icon" href="img/logo-icone.png">
+  <meta name="theme-color" content="#f9f5f0">
+  <!-- escolhe modo claro ou escuro antes da página aparecer -->
+  <script src="js/tema.js"></script>
+
+  <!-- fontes do Google: DM Serif Display (títulos, parecida com a do logo) e Figtree (texto) -->
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Figtree:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <!-- Leaflet: biblioteca do mapa -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css">
+  <!-- nossos estilos -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+<!-- barrinha dourada que mostra quanto da página já foi lida -->
+<div class="progresso" id="progresso" aria-hidden="true"></div>
+
+<!-- ============ TOPO / MENU (aparece em todas as páginas) ============ -->
+<header class="topo">
+  <a class="marca" href="#inicio" aria-label="Projeto Acolhe: página inicial">
+    <img class="marca-ico logo-claro" src="img/logo-icone.png" alt="">
+    <img class="marca-ico logo-escuro" src="img/logo-icone-escuro.png" alt="">
+    <span class="marca-txt"><small>projeto</small>acolhe</span>
+  </a>
+  <nav id="menu" aria-label="Menu principal">
+    <a href="#inicio" data-link-pagina="inicio">Início</a>
+    <a href="#elnino" data-link-pagina="elnino">El Niño</a>
+    <a href="#proteja" data-link-pagina="proteja">Como se proteger</a>
+    <a href="#doar" data-link-pagina="doar">Doar</a>
+    <a href="#voluntario" data-link-pagina="voluntario">Ser voluntário</a>
+    <a href="#materiais" data-link-pagina="materiais">Materiais</a>
+    <a href="#pontos" data-link-pagina="pontos" class="menu-destaque">📍 Pontos de coleta</a>
+  </nav>
+  <!-- botão do modo escuro: mostra a lua no claro e o sol no escuro -->
+  <button type="button" class="tema-btn" id="temaBtn" aria-label="Ativar modo escuro"><span class="lua-ico">🌙</span><span class="sol-ico">☀️</span></button>
+  <button type="button" class="menu-btn" id="menuBtn" aria-label="Abrir menu" aria-expanded="false" aria-controls="menu"><span></span></button>
+</header>
+
+
+<!-- =====================================================================
+     O site é dividido em "páginas" (<div class="pagina">).
+     O JavaScript mostra uma por vez, conforme o link clicado no menu.
+     ===================================================================== -->
+
+
+<!-- ##################### PÁGINA: INÍCIO ##################### -->
+<div class="pagina" data-pagina="inicio" id="inicio">
+
+  <!-- capa -->
+  <div class="hero">
+    <div class="raios" aria-hidden="true"></div>
+    <div class="nuvem-capa n1" aria-hidden="true"></div>
+    <div class="nuvem-capa n2" aria-hidden="true"></div>
+
+    <div class="hero-in">
+      <h1 class="hero-titulo">
+        <img class="hero-logo logo-claro" src="img/logo-transparente.png" alt="Projeto Acolhe">
+        <img class="hero-logo logo-escuro" src="img/logo-escuro.png" alt="Projeto Acolhe">
+      </h1>
+      <p class="hero-frase">Informar, acolher e conectar.</p>
+      <p class="hero-txt">Roupas e cobertas para quem está na rua ou perdeu a casa com os impactos do El Niño na Grande Florianópolis.</p>
+      <div class="cta">
+        <a class="btn" href="#doar">Quero doar</a>
+        <a class="btn o" href="#elnino">Entenda o El Niño</a>
+      </div>
+    </div>
+
+    <!-- ondas animadas, iguais à água do logo -->
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- o projeto -->
+  <section id="projeto">
+    <div class="cab">
+      <span class="kicker">quem somos</span>
+      <h2>O projeto</h2>
+      <p class="lead">O Projeto Acolhe apoia pessoas em situação de rua e desabrigadas diante dos eventos climáticos extremos ligados ao El Niño.</p>
+    </div>
+    <div class="grid">
+      <div class="card rv"><div class="dot">📢</div><h3>Informar</h3><p>Explicar o El Niño e como se proteger.</p></div>
+      <div class="card rv"><div class="dot">🧥</div><h3>Acolher</h3><p>Levar roupas e cobertas para quem passa frio.</p></div>
+      <div class="card rv"><div class="dot">🤝</div><h3>Conectar</h3><p>Unir quem precisa de ajuda e quem pode ajudar.</p></div>
+    </div>
+  </section>
+
+  <!-- destaque: pontos de coleta -->
+  <div class="destaque-pontos">
+    <div class="dp-in">
+      <div class="dp-txt rv">
+        <span class="kicker">onde doar</span>
+        <h2><span class="n-lugares">48</span> ideias de pontos de coleta</h2>
+        <p>Igrejas, supermercados, terminais de ônibus, escolas e clubes em <span class="n-cidades">6</span> cidades da Grande Florianópolis, todos num mapa.</p>
+        <a class="btn sol" href="#pontos">📍 Ver no mapa</a>
+      </div>
+      <a class="dp-mapa rv" href="#pontos" aria-label="Abrir o mapa dos pontos de coleta">
+        <!-- "foto" do mapa de verdade com os pinos (uma para cada tema; o CSS esconde a do outro) -->
+        <img class="mapa-claro" src="img/mapa-pontos-claro.jpg" alt="" width="1280" height="960" loading="lazy">
+        <img class="mapa-escuro" src="img/mapa-pontos-escuro.jpg" alt="" width="1280" height="960" loading="lazy">
+        <span class="dp-selo">📍 <span class="n-lugares">48</span> lugares</span>
+        <span class="dp-abrir">Abrir o mapa →</span>
+        <span class="dp-credito">Esri, OpenStreetMap</span>
+      </a>
+    </div>
+  </div>
+
+  <!-- quem mais sofre -->
+  <section id="quem">
+    <div class="cab">
+      <span class="kicker">realidade</span>
+      <h2>Quem mais sofre</h2>
+      <p class="lead">Para quem vive na rua, chuva forte e frio são um risco à vida. Roupa molhada e falta de coberta causam doenças.</p>
+    </div>
+    <ul class="tags">
+      <li>🏠 Abrigo</li><li>🧥 Agasalho</li><li>🛏️ Cobertas</li><li>🍲 Alimentação</li><li>🩺 Saúde</li><li>📢 Informação</li>
+    </ul>
+    <div class="two">
+      <div class="card rv"><h3>Uma população invisível</h3><p>Segundo o Ipea, a falta de dados sobre as pessoas em situação de rua dificulta a criação de políticas públicas.</p></div>
+      <div class="card rv"><h3>A ajuda existe, precisa chegar</h3><p>O MDS preparou a assistência social para o El Niño. O Acolhe ajuda as pessoas a encontrar esses serviços.</p></div>
+    </div>
+  </section>
+
+  <!-- atalhos para as outras páginas -->
+  <div class="fundo-ceu"><section id="ajudar">
+    <div class="cab">
+      <span class="kicker">explore</span>
+      <h2>Por onde começar?</h2>
+    </div>
+    <div class="grid atalhos">
+      <a class="atalho rv" href="#elnino"><span class="dot">🌊</span><h3>O El Niño</h3><p>O que é e como afeta o Brasil.</p><span class="seta">Ver →</span></a>
+      <a class="atalho rv" href="#proteja"><span class="dot">🛟</span><h3>Como se proteger</h3><p>Antes, durante e depois.</p><span class="seta">Ver →</span></a>
+      <a class="atalho rv" href="#doar"><span class="dot">🧥</span><h3>Seja doador</h3><p>Roupas, cobertas e as doações mais pedidas.</p><span class="seta">Ver →</span></a>
+      <a class="atalho rv" href="#voluntario"><span class="dot">🤝</span><h3>Seja voluntário</h3><p>Quem pode e como começar.</p><span class="seta">Ver →</span></a>
+      <a class="atalho rv" href="#materiais"><span class="dot">🖨️</span><h3>Materiais</h3><p>Marca-página e manual para imprimir.</p><span class="seta">Ver →</span></a>
+      <a class="atalho rv" href="#pontos"><span class="dot">📍</span><h3>Pontos de coleta</h3><p>Lugares no mapa e os mais perto de você.</p><span class="seta">Ver →</span></a>
+    </div>
+  </section></div>
+
+</div>
+
+
+<!-- ##################### PÁGINA: EL NIÑO ##################### -->
+<div class="pagina" data-pagina="elnino" id="elnino" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">entenda</span>
+    <h1>O El Niño</h1>
+    <p class="lead">É quando o mar do Oceano Pacífico fica mais quente que o normal. Isso muda o tempo no mundo todo, e aqui no Sul traz mais chuva.</p>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <section>
+    <div class="cab">
+      <span class="kicker">em 3 passos</span>
+      <h2>Como funciona?</h2>
+    </div>
+
+    <!-- causa e efeito: um passo leva ao outro (setas amarelas no meio) -->
+    <ol class="etapas">
+      <li class="etapa rv">
+        <span class="etapa-ico">🌡️</span>
+        <h3>O mar esquenta</h3>
+        <p>A água do Oceano Pacífico fica mais quente que o normal.</p>
+      </li>
+      <li class="etapa-seta" aria-hidden="true">→</li>
+      <li class="etapa rv">
+        <span class="etapa-ico">🌬️</span>
+        <h3>O tempo muda</h3>
+        <p>Os ventos e as chuvas mudam de lugar no mundo todo.</p>
+      </li>
+      <li class="etapa-seta" aria-hidden="true">→</li>
+      <li class="etapa aqui rv">
+        <span class="etapa-tag">é aqui!</span>
+        <span class="etapa-ico">🌧️</span>
+        <h3>Chove mais em SC</h3>
+        <p>Mais chuva, enchentes e temporais no Sul do Brasil.</p>
+      </li>
+    </ol>
+  </section>
+
+  <!-- linha do tempo: quando acontece -->
+  <div class="stats"><section>
+    <div class="cab">
+      <span class="kicker">linha do tempo</span>
+      <h2>Quando acontece?</h2>
+    </div>
+    <ol class="tempo">
+      <li class="rv"><span class="tempo-ico">📢</span><b>Junho de 2026</b><p>O El Niño foi confirmado</p></li>
+      <li class="rv"><span class="tempo-ico">🌧️</span><b>Primavera e verão</b><p>Época de mais chuva e temporais em SC</p></li>
+      <li class="rv"><span class="tempo-ico">🗓️</span><b>Início de 2027</b><p>Deve durar pelo menos até aqui</p></li>
+    </ol>
+  </section></div>
+
+  <!-- El Niño x La Niña -->
+  <section id="la-nina">
+    <div class="cab">
+      <span class="kicker">compare</span>
+      <h2>El Niño × La Niña</h2>
+      <p class="lead">São fases opostas do mesmo fenômeno, a Oscilação Sul-El Niño (ENSO), no Pacífico Equatorial. Um aquece a água, o outro esfria, e os efeitos são contrários.</p>
+    </div>
+    <div class="vs rv">
+      <div class="vs-cab">
+        <span></span>
+        <b class="vs-nino">🔥 El Niño</b>
+        <b class="vs-nina">❄️ La Niña</b>
+      </div>
+      <div class="vs-linha"><span>Água do Pacífico</span><p>Mais quente que o normal</p><p>Mais fria que o normal</p></div>
+      <div class="vs-linha"><span>Ventos alísios</span><p>Enfraquecem</p><p>Ficam mais fortes</p></div>
+      <div class="vs-linha"><span>Norte e Nordeste</span><p>Seca</p><p>Mais chuva</p></div>
+      <div class="vs-linha"><span>Sul (SC)</span><p>Chuvas intensas e enchentes</p><p>Menos chuva</p></div>
+      <div class="vs-linha"><span>No mundo</span><p>Ondas de calor, seca na Austrália e Indonésia, chuva na costa oeste da América do Sul</p><p>Efeitos opostos: mais chuva em algumas regiões e estiagem em outras</p></div>
+    </div>
+  </section>
+
+  <!-- impacto no mundo -->
+  <section id="mundo">
+    <div class="cab">
+      <span class="kicker">no mundo</span>
+      <h2>Impacto global</h2>
+      <p class="lead">O El Niño reorganiza a circulação da atmosfera do planeta inteiro.</p>
+    </div>
+    <div class="grid">
+      <div class="card rv"><div class="dot">🏜️</div><h3>Secas severas</h3><p>Na Austrália, na Indonésia e em partes do Sudeste Asiático.</p></div>
+      <div class="card rv"><div class="dot">🌊</div><h3>Chuvas e enchentes</h3><p>Na costa oeste das Américas: Peru, Equador e EUA.</p></div>
+      <div class="card rv"><div class="dot">🌡️</div><h3>Ondas de calor</h3><p>O fenômeno eleva a temperatura média do planeta.</p></div>
+      <div class="card rv"><div class="dot">⛈️</div><h3>Mais extremos</h3><p>Tempestades e estiagens longas ficam mais frequentes.</p></div>
+    </div>
+  </section>
+
+  <!-- infográfico da MetSul + resumo por região -->
+  <div class="fundo-ceu"><section id="brasil">
+    <div class="cab">
+      <span class="kicker">no brasil</span>
+      <h2>Como o El Niño impacta o Brasil</h2>
+    </div>
+    <div class="regioes">
+      <button type="button" class="infografico rv" id="abrirInfo" aria-label="Ampliar o infográfico">
+        <img src="img/el-nino-brasil.jpg" alt="Mapa do Brasil mostrando os impactos do El Niño em cada região" loading="lazy">
+        <span class="lupa">🔍 Toque para ampliar</span>
+      </button>
+      <ul class="lista-regioes">
+        <li class="rv r-sul"><b>Sul <em>é aqui!</em></b>A região mais sensível: mais chuva, temporais e enchentes.</li>
+        <li class="rv r-norte"><b>Norte</b>Tendência de seca, principalmente no norte da Amazônia.</li>
+        <li class="rv r-nordeste"><b>Nordeste</b>Seca, principalmente no norte da região.</li>
+        <li class="rv r-centro"><b>Centro-Oeste</b>Chuvas mais irregulares e ondas de calor.</li>
+        <li class="rv r-sudeste"><b>Sudeste</b>Estação chuvosa muda de data e o calor aumenta.</li>
+      </ul>
+    </div>
+    <p class="note fonte">Fonte do infográfico: MetSul Meteorologia.</p>
+  </section></div>
+
+  <!-- Santa Catarina -->
+  <section id="sc">
+    <div class="cab">
+      <span class="kicker">em santa catarina</span>
+      <h2>O que esperar em SC</h2>
+      <p class="lead">Os principais efeitos esperados no nosso estado:</p>
+    </div>
+    <div class="itens efeitos-sc">
+      <div class="item rv"><span>🌧️</span><p><b>Chuva acima da média</b>principalmente na primavera e no início do verão</p></div>
+      <div class="item rv"><span>🌊</span><p><b>Mais risco de enchentes</b>como as do RS em 2026, apontadas como impacto inicial do El Niño</p></div>
+      <div class="item rv"><span>⛈️</span><p><b>Temporais mais frequentes</b>com rajadas de vento, granizo e raios</p></div>
+      <div class="item rv"><span>⛰️</span><p><b>Deslizamentos</b>em encostas, por causa do solo encharcado</p></div>
+      <div class="item rv"><span>🌡️</span><p><b>Ondas de calor</b>o fenômeno também favorece temperaturas mais altas</p></div>
+    </div>
+  </section>
+
+  <!-- por que SC é tão vulnerável -->
+  <div class="destaque-sc"><section>
+    <div class="cab">
+      <span class="kicker">entenda o risco</span>
+      <h2>Por que SC é tão vulnerável?</h2>
+    </div>
+    <div class="grid causas">
+      <div class="causa rv"><span class="causa-ico">⛰️</span><h3>Relevo acidentado</h3><span class="causa-seta">↓</span><p>Mais risco de deslizamentos</p></div>
+      <div class="causa rv"><span class="causa-ico">🏞️</span><h3>Bacias hidrográficas curtas</h3><span class="causa-seta">↓</span><p>Enchentes que chegam rápido</p></div>
+      <div class="causa rv"><span class="causa-ico">🌬️</span><h3>Frentes frias e tempestades</h3><span class="causa-seta">↓</span><p>Temporais intensos</p></div>
+    </div>
+    <div class="cta"><a class="btn sol" href="#proteja">Veja como se proteger →</a></div>
+  </section></div>
+
+</div>
+
+
+<!-- ##################### PÁGINA: COMO SE PROTEGER ##################### -->
+<div class="pagina" data-pagina="proteja" id="proteja" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">mini manual</span>
+    <h1>Como se proteger</h1>
+    <p class="lead">O que fazer antes, durante e depois de uma emergência climática.</p>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <section>
+    <!-- abas -->
+    <div class="abas" role="tablist" aria-label="Momento da emergência">
+      <button type="button" role="tab" class="on" aria-selected="true" data-aba="antes">⏳ Antes</button>
+      <button type="button" role="tab" aria-selected="false" data-aba="durante">🌧️ Durante</button>
+      <button type="button" role="tab" aria-selected="false" data-aba="depois">🧹 Depois</button>
+    </div>
+
+    <div class="painel on" id="antes" role="tabpanel">
+      <div class="steps">
+        <div class="step"><p><strong>Receba alertas:</strong> mande seu CEP por SMS para o <b class="destaque">40199</b> (Defesa Civil, grátis).</p></div>
+        <div class="step"><p><strong>Evite áreas de risco:</strong> margens de rios, encostas e lugares que alagam.</p></div>
+        <div class="step"><p><strong>Saiba para onde ir:</strong> o abrigo, CRAS ou Centro POP mais perto.</p></div>
+        <div class="step"><p><strong>Deixe uma mochila pronta</strong> com documentos, remédios e roupa seca.</p></div>
+      </div>
+    </div>
+    <div class="painel" id="durante" role="tabpanel">
+      <div class="steps">
+        <div class="step"><p><strong>Não atravesse enxurrada:</strong> pouca água já derruba uma pessoa.</p></div>
+        <div class="step"><p><strong>Vá para um lugar alto</strong> ou para um abrigo.</p></div>
+        <div class="step"><p><strong>Fique longe de fios</strong> e desligue a energia, se for seguro.</p></div>
+        <div class="step"><p><strong>Peça ajuda:</strong> 199 (Defesa Civil) ou 193 (Bombeiros).</p></div>
+      </div>
+    </div>
+    <div class="painel" id="depois" role="tabpanel">
+      <div class="steps">
+        <div class="step"><p><strong>Evite a água da enchente:</strong> ela transmite leptospirose.</p></div>
+        <div class="step"><p><strong>Só volte para casa</strong> quando a Defesa Civil liberar.</p></div>
+        <div class="step"><p><strong>Troque a roupa molhada</strong> o quanto antes para não adoecer.</p></div>
+        <div class="step"><p><strong>Teve febre?</strong> Procure um posto de saúde.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <div class="fundo-areia"><section>
+    <div class="cab">
+      <span class="kicker">ligue</span>
+      <h2>Telefones de emergência</h2>
+    </div>
+    <div class="grid tel">
+      <a href="tel:199"><b>199</b>Defesa Civil</a>
+      <a href="tel:193"><b>193</b>Bombeiros</a>
+      <a href="tel:192"><b>192</b>SAMU</a>
+      <a href="tel:190"><b>190</b>Polícia Militar</a>
+    </div>
+  </section></div>
+
+</div>
+
+
+<!-- ##################### PÁGINA: DOAR ##################### -->
+<div class="pagina" data-pagina="doar" id="doar" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">seja doador</span>
+    <h1>Roupas e cobertas</h1>
+    <p class="lead">Nosso foco são roupas e cobertas, o que mais falta no frio e na chuva. Mas também mostramos as doações mais pedidas em geral.</p>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- o que doar -->
+  <section>
+    <div class="cab">
+      <span class="kicker">passo 1</span>
+      <h2>O que doar</h2>
+    </div>
+
+    <div class="abas" role="tablist" aria-label="Categorias de doação">
+      <button type="button" role="tab" class="on" aria-selected="true" data-aba="cat-roupas">🧥 Roupas</button>
+      <button type="button" role="tab" aria-selected="false" data-aba="cat-cobertas">🛏️ Cobertas</button>
+      <button type="button" role="tab" aria-selected="false" data-aba="cat-acessorios">🧦 Calçados e acessórios</button>
+    </div>
+
+    <div class="painel on" id="cat-roupas" role="tabpanel">
+      <div class="itens">
+        <div class="item"><span>🧥</span>Casacos e jaquetas</div>
+        <div class="item"><span>👕</span>Moletons e blusas de lã</div>
+        <div class="item"><span>👖</span>Calças</div>
+        <div class="item"><span>🧒</span>Roupas de criança</div>
+        <div class="item"><span>🩲</span>Roupa íntima nova</div>
+        <div class="item"><span>🌙</span>Pijamas</div>
+      </div>
+    </div>
+    <div class="painel" id="cat-cobertas" role="tabpanel">
+      <div class="itens">
+        <div class="item"><span>🛏️</span>Cobertores</div>
+        <div class="item"><span>🧣</span>Mantas</div>
+        <div class="item"><span>☁️</span>Edredons</div>
+        <div class="item"><span>🛌</span>Lençóis</div>
+        <div class="item"><span>💤</span>Travesseiros</div>
+        <div class="item"><span>🧺</span>Toalhas de banho</div>
+      </div>
+    </div>
+    <div class="painel" id="cat-acessorios" role="tabpanel">
+      <div class="itens">
+        <div class="item"><span>🧦</span>Meias</div>
+        <div class="item"><span>👟</span>Tênis e botas</div>
+        <div class="item"><span>🧢</span>Toucas</div>
+        <div class="item"><span>🧤</span>Luvas</div>
+        <div class="item"><span>🧣</span>Cachecóis</div>
+        <div class="item"><span>🌂</span>Capas de chuva</div>
+      </div>
+    </div>
+
+    <!-- doações mais pedidas em geral (mesma lista do marca-página) -->
+    <div class="top-doacoes rv">
+      <div class="top-cab">
+        <span class="etiqueta">Além das roupas</span>
+        <h3>Doações mais pedidas em geral</h3>
+        <p>Nosso foco são roupas e cobertas, mas em enchentes e desastres estas são as doações que mais fazem falta:</p>
+      </div>
+      <ol class="top-lista">
+        <li><span>💧</span>Água potável</li>
+        <li><span>🧽</span>Produtos de limpeza</li>
+        <li><span>🥫</span>Alimentos não perecíveis e cestas básicas</li>
+        <li><span>🧼</span>Higiene pessoal</li>
+        <li><span>🛏️</span>Colchões</li>
+        <li><span>🧺</span>Cobertores, roupa de cama e roupa de banho</li>
+        <li><span>👶</span>Fraldas, absorventes e lenços umedecidos</li>
+      </ol>
+      <p class="note">Antes de levar, pergunte ao local o que está faltando. Esta lista também está no <a href="#materiais">marca-página para imprimir</a>.</p>
+    </div>
+  </section>
+
+  <!-- em que estado -->
+  <div class="fundo-ceu"><section id="condicoes">
+    <div class="cab">
+      <span class="kicker">passo 2</span>
+      <h2>Em que estado doar</h2>
+      <p class="lead">Regra de ouro: só doe o que você usaria.</p>
+    </div>
+
+    <div class="two">
+      <div class="card yes rv">
+        <h3>Pode doar</h3>
+        <div class="row"><span>Limpa e bem seca</span></div>
+        <div class="row"><span>Sem rasgos, furos ou manchas</span></div>
+        <div class="row"><span>Zíper e botões funcionando</span></div>
+        <div class="row"><span>Calçados em pares</span></div>
+      </div>
+      <div class="card no rv">
+        <h3>Não doe</h3>
+        <div class="row"><span>Peça suja, úmida ou com mofo</span></div>
+        <div class="row"><span>Peça rasgada ou furada</span></div>
+        <div class="row"><span>Roupa íntima usada</span></div>
+        <div class="row"><span>Fantasias e roupas de festa</span></div>
+      </div>
+    </div>
+
+    <!-- teste interativo -->
+    <div class="quiz rv" id="quiz">
+      <h3>🧺 Essa peça pode ser doada?</h3>
+      <p class="note">Pegue a roupa ou coberta e marque o que for verdade:</p>
+      <div class="checks">
+        <label><input type="checkbox" data-falta="lavar"> Está limpa</label>
+        <label><input type="checkbox" data-falta="deixar secar"> Está seca, sem cheiro de mofo</label>
+        <label><input type="checkbox" data-falta="consertar ou tirar as manchas"> Sem rasgos ou manchas</label>
+        <label><input type="checkbox" data-falta="arrumar zíper e botões"> Zíper e botões ok</label>
+      </div>
+      <p class="quiz-res" aria-live="polite">Marque os itens para ver o resultado.</p>
+    </div>
+  </section></div>
+
+  <!-- como entregar -->
+  <section id="como-doar">
+    <div class="cab">
+      <span class="kicker">passo 3</span>
+      <h2>Como entregar</h2>
+    </div>
+    <ol class="passos">
+      <li class="rv"><div class="passo"><span class="passo-ico">🧺</span><b>Separe</b><p>Só as peças em bom estado.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">🧼</span><b>Lave e seque</b><p>Tudo pronto para usar.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">📦</span><b>Embale</b><p>Sacos fechados, por tipo e tamanho.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">🚗</span><b>Entregue</b><p>Num ponto de coleta. E divulgue!</p></div></li>
+    </ol>
+    <div class="aviso rv">
+      <span>💡</span>
+      <p><strong>Dica:</strong> escreva por fora do saco o que tem dentro (ex.: “Agasalho – adulto – G”) e amarre os calçados em pares.</p>
+    </div>
+    <div class="cta"><a class="btn" href="#pontos">📍 Ver pontos de coleta</a></div>
+  </section>
+
+  <!-- perguntas frequentes (abre e fecha) -->
+  <div class="fundo-ceu"><section id="duvidas">
+    <div class="cab">
+      <span class="kicker">dúvidas</span>
+      <h2>Perguntas frequentes</h2>
+      <p class="lead">Toque na pergunta para ver a resposta.</p>
+    </div>
+    <div class="faq">
+      <details class="rv"><summary>Posso doar roupa usada?</summary><p>Pode! Desde que esteja limpa, seca e em bom estado, sem rasgos nem manchas. A única exceção é a roupa íntima: essa precisa ser nova.</p></details>
+      <details class="rv"><summary>A roupa precisa estar passada?</summary><p>Não. Basta estar limpa e bem seca. Dobrar e separar por tamanho já ajuda muito quem vai fazer a triagem.</p></details>
+      <details class="rv"><summary>Aceitam colchão?</summary><p>Colchões estão entre as doações mais pedidas, mas ocupam muito espaço. Ligue antes para o abrigo ou ponto de coleta e combine a entrega.</p></details>
+      <details class="rv"><summary>Posso doar sapato usado?</summary><p>Sim, se estiver inteiro, sem a sola soltando, e em pares. Amarre os dois com um elástico para não se perderem.</p></details>
+      <details class="rv"><summary>Roupa de verão também serve?</summary><p>Serve, porque quem perdeu a casa perdeu tudo. Mas no frio e na chuva, agasalhos e cobertores são o que mais faz falta.</p></details>
+      <details class="rv"><summary>Posso doar dinheiro?</summary><p>Só para instituições conhecidas ou campanhas oficiais (prefeitura, Defesa Civil, ONGs com CNPJ). Desconfie de pedidos de Pix recebidos por mensagem.</p></details>
+      <details class="rv"><summary>Onde eu entrego?</summary><p>Veja as ideias de pontos de coleta no <a href="#pontos">mapa</a>. São sugestões: antes de levar, confirme se o local está recebendo doações.</p></details>
+    </div>
+  </section></div>
+
+</div>
+
+
+<!-- ##################### PÁGINA: VOLUNTÁRIO ##################### -->
+<div class="pagina" data-pagina="voluntario" id="voluntario" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">faça parte</span>
+    <h1>Seja voluntário</h1>
+    <p class="lead">Não precisa ser especialista: precisa de vontade e compromisso.</p>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <!-- quem pode -->
+  <section>
+    <div class="cab">
+      <span class="kicker">quem pode</span>
+      <h2>Do que você precisa</h2>
+      <p class="lead">Voluntário doa tempo, sem receber por isso. É garantido pela Lei nº 9.608/1998.</p>
+    </div>
+    <div class="itens requisitos">
+      <div class="item rv"><span>🎂</span>18 anos (ou autorização dos pais)</div>
+      <div class="item rv"><span>🪪</span>Documento com foto</div>
+      <div class="item rv"><span>⏰</span>Algumas horas livres</div>
+    </div>
+    <p class="nao-precisa rv">✨ <b>Não precisa</b> de experiência nem de profissão. E dá para ajudar sem sair de casa!</p>
+  </section>
+
+  <!-- o que fazer -->
+  <div class="fundo-ceu"><section id="formas">
+    <div class="cab">
+      <span class="kicker">atividades</span>
+      <h2>O que você pode fazer</h2>
+    </div>
+    <div class="two">
+      <div class="card ativ-lista rv">
+        <h3>📍 Presencial</h3>
+        <ul>
+          <li><span>📦</span><p><b>Triagem</b>Separar roupas por tipo e tamanho</p></li>
+          <li><span>🧥</span><p><b>Distribuição</b>Entregar roupas e cobertas nos abrigos</p></li>
+          <li><span>🏠</span><p><b>Abrigos</b>Recepção, organização e escuta</p></li>
+          <li><span>🚗</span><p><b>Transporte</b>Levar as doações até os abrigos</p></li>
+        </ul>
+      </div>
+      <div class="card ativ-lista rv">
+        <h3>🏠 De casa</h3>
+        <ul>
+          <li><span>📱</span><p><b>Divulgação</b>Compartilhar a campanha nas redes</p></li>
+          <li><span>🏫</span><p><b>Arrecadação</b>Campanha do agasalho na escola ou no trabalho</p></li>
+          <li><span>🎨</span><p><b>Design</b>Criar cartazes e posts</p></li>
+          <li><span>📞</span><p><b>Contato</b>Ligar para abrigos e ver o que falta</p></li>
+        </ul>
+      </div>
+    </div>
+  </section></div>
+
+  <!-- como começar -->
+  <section id="comecar">
+    <div class="cab">
+      <span class="kicker">passo a passo</span>
+      <h2>Como começar</h2>
+    </div>
+    <ol class="passos cinco">
+      <li class="rv"><div class="passo"><span class="passo-ico">📍</span><b>Escolha</b><p>Um abrigo, ONG, igreja ou CRAS.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">💬</span><b>Converse</b><p>Diga que quer ajudar e seus horários.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">🧭</span><b>Orientação</b><p>Uma conversa rápida antes de começar.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">✍️</span><b>Termo</b><p>Assine o termo de voluntariado.</p></div></li>
+      <li class="rv"><div class="passo"><span class="passo-ico">🙌</span><b>Comece!</b><p>Seja pontual e avise se faltar.</p></div></li>
+    </ol>
+    <div class="aviso rv">
+      <span>🎒</span>
+      <p><strong>No primeiro dia, leve:</strong> documento, garrafa de água, calçado fechado e capa de chuva.</p>
+    </div>
+  </section>
+
+  <!-- como agir -->
+  <div class="fundo-areia"><section id="postura">
+    <div class="cab">
+      <span class="kicker">no dia a dia</span>
+      <h2>Como agir</h2>
+    </div>
+    <div class="two">
+      <div class="card yes rv">
+        <h3>Faça</h3>
+        <div class="row"><span>Chame pelo nome e escute</span></div>
+        <div class="row"><span>Siga a equipe do local</span></div>
+        <div class="row"><span>Respeite a privacidade</span></div>
+      </div>
+      <div class="card no rv">
+        <h3>Evite</h3>
+        <div class="row"><span>Fotos sem autorização</span></div>
+        <div class="row"><span>Promessas que não pode cumprir</span></div>
+        <div class="row"><span>Dar remédio ou dinheiro</span></div>
+      </div>
+    </div>
+    <div class="cta"><a class="btn" href="#pontos">📍 Encontrar um lugar</a></div>
+  </section></div>
+
+</div>
+
+
+<!-- ##################### PÁGINA: MATERIAIS ##################### -->
+<div class="pagina" data-pagina="materiais" id="materiais" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">para imprimir</span>
+    <h1>Materiais</h1>
+    <p class="lead">Baixe, imprima e distribua. Ajude a espalhar o Projeto Acolhe.</p>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <section>
+    <div class="materiais">
+      <!-- marca-página -->
+      <div class="material rv">
+        <a class="mp-previa" href="materiais/marca-pagina-projeto-acolhe.pdf" target="_blank" rel="noopener" aria-label="Abrir o marca-página em PDF">
+          <img class="mp-frente" src="img/marca-pagina-frente.jpg" alt="Frente do marca-página: logo do Projeto Acolhe e lista das doações mais pedidas" loading="lazy">
+          <img class="mp-verso" src="img/marca-pagina-verso.jpg" alt="Verso do marca-página: texto sobre o projeto e QR code do site" loading="lazy">
+        </a>
+        <div class="material-txt">
+          <span class="etiqueta">PDF · 2 páginas</span>
+          <h3>Marca-página</h3>
+          <p>Na frente, as doações mais pedidas em geral. No verso, o que é o projeto e o QR code que abre este site.</p>
+          <ul class="dicas-impressao">
+            <li>📏 Tamanho: 5 × 15 cm</li>
+            <li>🖨️ Na impressão, escolha <b>“Tamanho real”</b> (100%)</li>
+            <li>📄 Papel mais grosso (180 g) fica melhor</li>
+          </ul>
+          <div class="cta">
+            <a class="btn" href="materiais/marca-pagina-projeto-acolhe.pdf" download>⬇ Baixar PDF</a>
+            <a class="btn o" href="materiais/marca-pagina-projeto-acolhe.pdf" target="_blank" rel="noopener">Ver o arquivo</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- manual (ainda vai chegar) -->
+      <div class="material em-breve rv">
+        <div class="dot">📘</div>
+        <span class="etiqueta breve">Em breve</span>
+        <h3>Manual do Projeto Acolhe</h3>
+        <p>Logo vai estar aqui para baixar.</p>
+      </div>
+    </div>
+  </section>
+
+</div>
+
+
+<!-- ##################### PÁGINA: PONTOS DE COLETA ##################### -->
+<div class="pagina" data-pagina="pontos" id="pontos" hidden>
+
+  <div class="pagina-topo">
+    <span class="kicker">grande florianópolis</span>
+    <h1>Pontos de coleta</h1>
+    <p class="lead">Ideias de lugares reais por onde muita gente passa e que poderiam receber roupas e cobertas.</p>
+    <div class="numeros-pontos">
+      <div><b class="n-lugares">48</b>lugares</div>
+      <div><b class="n-cidades">6</b>cidades</div>
+      <div><b class="n-tipos">7</b>tipos de lugar</div>
+    </div>
+    <div class="ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  </div>
+
+  <section class="secao-mapa">
+    <!-- filtros: tipo de lugar e cidade -->
+    <div class="filtros" id="filtroMapa" role="group" aria-label="Filtrar por tipo de lugar">
+      <button type="button" class="on" data-cat="todos">Todos</button>
+      <button type="button" data-cat="igreja">⛪ Igrejas</button>
+      <button type="button" data-cat="mercado">🛒 Supermercados</button>
+      <button type="button" data-cat="terminal">🚌 Terminais</button>
+      <button type="button" data-cat="publico">🏛️ Prédios públicos</button>
+      <button type="button" data-cat="escola">🏫 Escolas</button>
+      <button type="button" data-cat="shopping">🛍️ Shoppings</button>
+      <button type="button" data-cat="clube">⚽ Clubes</button>
+    </div>
+    <div class="linha-cidade">
+      <label for="filtroCidade">Cidade:</label>
+      <select id="filtroCidade"><option value="todas">Todas as cidades</option></select>
+      <button type="button" class="btn sol perto-btn" id="pertoBtn">📍 Perto de mim</button>
+    </div>
+    <p class="dica-cat" id="dicaMapa">Toque em um ponto vermelho ou em um lugar da lista.</p>
+
+    <!-- mapa + lista lado a lado -->
+    <div class="mapa-area">
+      <div class="mapa" id="mapaColeta" role="region" aria-label="Mapa da Grande Florianópolis com ideias de pontos de coleta"></div>
+      <div class="lista-lado">
+        <p class="contagem" id="contagem">48 lugares</p>
+        <ul class="lista-pontos" id="listaPontos"></ul>
+      </div>
+    </div>
+    <p class="note fonte">São apenas sugestões: esses lugares não são pontos de coleta oficiais. Confirme antes de levar a doação. Mapa: Esri e OpenStreetMap.</p>
+  </section>
+
+  <div class="fundo-areia"><section>
+    <div class="cab">
+      <span class="kicker">faça você mesmo</span>
+      <h2>Como montar um ponto de coleta</h2>
+    </div>
+    <div class="steps">
+      <div class="step"><p><strong>Peça autorização</strong> ao responsável pelo lugar.</p></div>
+      <div class="step"><p><strong>Monte uma caixa</strong> identificada: “Roupas e cobertas – Projeto Acolhe”.</p></div>
+      <div class="step"><p><strong>Divulgue</strong> com cartaz e nas redes sociais.</p></div>
+      <div class="step"><p><strong>Combine a entrega</strong> com um abrigo ou ONG.</p></div>
+    </div>
+  </section></div>
+
+</div>
+
+
+<!-- ============ RODAPÉ (aparece em todas as páginas) ============ -->
+<footer>
+  <div class="ondas rodape-ondas" aria-hidden="true"><i></i><i></i><i></i></div>
+  <div class="rodape-in">
+    <img class="rodape-logo logo-claro" src="img/logo-transparente.png" alt="Projeto Acolhe">
+    <img class="rodape-logo logo-escuro" src="img/logo-escuro.png" alt="Projeto Acolhe">
+    <nav class="rodape-links" aria-label="Links do rodapé">
+      <a href="#inicio">Início</a>
+      <a href="#elnino">El Niño</a>
+      <a href="#proteja">Como se proteger</a>
+      <a href="#doar">Doar</a>
+      <a href="#voluntario">Ser voluntário</a>
+      <a href="#materiais">Materiais</a>
+      <a href="#pontos">Pontos de coleta</a>
+    </nav>
+    <p>Projeto Integrador Senac · 2026</p>
+    <p class="note">Fontes: MetSul, MDS, Ipea, Defesa Civil e Lei nº 9.608/1998.</p>
+  </div>
+  <p class="creditos">Site criado por <strong>Mateus Machado da Costa Zanela</strong> e <strong>Marlon Soares Silva</strong></p>
+</footer>
+
+<!-- botão de voltar ao topo (aparece depois de rolar a página) -->
+<button type="button" class="voltar-topo" id="voltarTopo" aria-label="Voltar ao topo">↑</button>
+
+<!-- janela para ver o infográfico grande -->
+<dialog class="zoom" id="zoom">
+  <button type="button" class="zoom-fechar" id="fecharInfo" aria-label="Fechar">✕</button>
+  <img src="img/el-nino-brasil.jpg" alt="Infográfico: como o El Niño impacta o Brasil (MetSul)" loading="lazy">
+</dialog>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+<script src="js/script.js"></script>
+</body>
+</html>
