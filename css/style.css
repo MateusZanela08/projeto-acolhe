@@ -770,8 +770,7 @@ html[data-tema="escuro"] .tema-btn .sol-ico { display: inline; }
   text-align: center;
 }
 html[data-tema="escuro"] .vs-nino { color: #f39a63; }
-html[data-tema="escuro"] .vs-nina,
-html[data-tema="escuro"] .etiqueta.breve { color: #7fb2ec; }
+html[data-tema="escuro"] .vs-nina { color: #7fb2ec; }
 
 /* infográfico + lista de regiões */
 .regioes {
@@ -1129,9 +1128,9 @@ html[data-tema="escuro"] .dp-credito { color: rgba(255, 255, 255, .5); }
 /* materiais para baixar (marca-página e manual) */
 .materiais {
   display: grid;
-  grid-template-columns: 2fr 1fr;
   gap: 24px;
-  margin-top: 36px;
+  max-width: 900px;
+  margin: 36px auto 0;
 }
 .material {
   display: grid;
@@ -1166,7 +1165,12 @@ html[data-tema="escuro"] .dp-credito { color: rgba(255, 255, 255, .5); }
 .mp-previa:hover .mp-frente { transform: rotate(-10deg) translate(-8px, -6px); }
 .mp-previa:hover .mp-verso { transform: rotate(10deg) translate(8px, -6px); }
 
-/* etiqueta pequena ("PDF · 2 páginas", "Em breve") */
+/* prévia do manual: mesmas folhas em leque, mas no formato A4 (capa na frente) */
+.manual-previa { height: 270px; }
+.manual-previa img { top: 24px; width: 150px; }
+.manual-previa .mp-verso { left: 64px; }
+
+/* etiqueta pequena ("PDF · 2 páginas") */
 .etiqueta {
   display: inline-block;
   margin-bottom: 10px;
@@ -1177,7 +1181,6 @@ html[data-tema="escuro"] .dp-credito { color: rgba(255, 255, 255, .5); }
   font-size: .78rem;
   font-weight: 800;
 }
-.etiqueta.breve { background: var(--ceu); color: var(--marinho2); }
 
 .dicas-impressao {
   display: grid;
@@ -1189,20 +1192,6 @@ html[data-tema="escuro"] .dp-credito { color: rgba(255, 255, 255, .5); }
   font-size: .95rem;
 }
 .material .cta { justify-content: flex-start; margin-top: 18px; }
-
-/* cartão do manual que ainda vai chegar */
-.material.em-breve {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border: 2px dashed var(--line);
-  background: transparent;
-  box-shadow: none;
-  text-align: center;
-}
-.material.em-breve .dot { margin-bottom: 12px; }
-.material.em-breve p { margin: 0; }
 
 
 /* ===== 13. FILTROS (tipos de lugar no mapa) ===== */
