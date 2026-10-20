@@ -81,12 +81,29 @@
     <div class="cab">
       <span class="kicker">quem somos</span>
       <h2>O projeto</h2>
-      <p class="lead">O Projeto Acolhe apoia pessoas em situação de rua e desabrigadas diante dos eventos climáticos extremos ligados ao El Niño.</p>
+      <p class="lead">Somos a <b>turma 008 do Jovem Aprendiz do Senac de Florianópolis</b>. Com o Projeto Acolhe, apoiamos pessoas em situação de rua e desabrigadas diante dos eventos climáticos extremos ligados ao El Niño.</p>
     </div>
     <div class="grid">
       <div class="card rv"><div class="dot">📢</div><h3>Informar</h3><p>Explicar o El Niño e como se proteger.</p></div>
       <div class="card rv"><div class="dot">🧥</div><h3>Acolher</h3><p>Levar roupas e cobertas para quem passa frio.</p></div>
       <div class="card rv"><div class="dot">🤝</div><h3>Conectar</h3><p>Unir quem precisa de ajuda e quem pode ajudar.</p></div>
+    </div>
+
+    <!-- fotos da turma (tocar abre a foto grande na mesma janela do infográfico) -->
+    <div class="turma">
+      <h3 class="turma-titulo rv">📸 A turma 008 no dia da apresentação</h3>
+      <div class="fotos-turma">
+        <button type="button" class="foto-turma larga rv" data-ampliar="img/turma-apresentacao.jpg" aria-label="Ampliar a foto da turma no auditório">
+          <img src="img/turma-apresentacao.jpg" alt="A turma 008 no auditório do Senac, com o site do Projeto Acolhe no telão" width="1280" height="518" loading="lazy">
+        </button>
+        <button type="button" class="foto-turma rv" data-ampliar="img/turma-palco.jpg" aria-label="Ampliar a foto da turma no palco">
+          <img src="img/turma-palco.jpg" alt="A turma 008 reunida no palco do Senac" width="1280" height="960" loading="lazy">
+        </button>
+        <button type="button" class="foto-turma rv" data-ampliar="img/turma-selfie.jpg" aria-label="Ampliar a selfie da turma">
+          <img src="img/turma-selfie.jpg" alt="Selfie da turma 008 no palco do Senac" width="1280" height="960" loading="lazy">
+        </button>
+      </div>
+      <p class="note fonte">Toque numa foto para ampliar.</p>
     </div>
   </section>
 
@@ -240,7 +257,7 @@
       <h2>Como o El Niño impacta o Brasil</h2>
     </div>
     <div class="regioes">
-      <button type="button" class="infografico rv" id="abrirInfo" aria-label="Ampliar o infográfico">
+      <button type="button" class="infografico rv" data-ampliar="img/el-nino-brasil.jpg" aria-label="Ampliar o infográfico">
         <img src="img/el-nino-brasil.jpg" alt="Mapa do Brasil mostrando os impactos do El Niño em cada região" loading="lazy">
         <span class="lupa">🔍 Toque para ampliar</span>
       </button>
@@ -402,7 +419,7 @@
       </div>
     </div>
 
-    <!-- doações mais pedidas em geral (mesma lista do marca-página) -->
+    <!-- doações mais pedidas em geral (mesma lista da frente do marca-página) -->
     <div class="top-doacoes rv">
       <div class="top-cab">
         <span class="etiqueta">Além das roupas</span>
@@ -412,10 +429,10 @@
       <ol class="top-lista">
         <li><span>💧</span>Água potável</li>
         <li><span>🧽</span>Produtos de limpeza</li>
-        <li><span>🥫</span>Alimentos não perecíveis e cestas básicas</li>
+        <li><span>🥫</span>Alimentos não perecíveis</li>
         <li><span>🧼</span>Higiene pessoal</li>
         <li><span>🛏️</span>Colchões</li>
-        <li><span>🧺</span>Cobertores, roupa de cama e roupa de banho</li>
+        <li><span>🧥</span>Cobertores, roupas e calçados</li>
         <li><span>👶</span>Fraldas, absorventes e lenços umedecidos</li>
       </ol>
       <p class="note">Antes de levar, pergunte ao local o que está faltando. Esta lista também está no <a href="#materiais">marca-página para imprimir</a>.</p>
@@ -746,10 +763,10 @@
 <!-- botão de voltar ao topo (aparece depois de rolar a página) -->
 <button type="button" class="voltar-topo" id="voltarTopo" aria-label="Voltar ao topo">↑</button>
 
-<!-- janela para ver o infográfico grande -->
+<!-- janela para ver uma imagem grande (infográfico e fotos da turma); o JS coloca a imagem certa -->
 <dialog class="zoom" id="zoom">
-  <button type="button" class="zoom-fechar" id="fecharInfo" aria-label="Fechar">✕</button>
-  <img src="img/el-nino-brasil.jpg" alt="Infográfico: como o El Niño impacta o Brasil (MetSul)" loading="lazy">
+  <button type="button" class="zoom-fechar" id="fecharZoom" aria-label="Fechar">✕</button>
+  <img id="zoomImg" alt="">
 </dialog>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>

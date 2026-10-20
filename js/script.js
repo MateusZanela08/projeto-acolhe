@@ -437,12 +437,19 @@ filtroCidade.onchange = function () {
 };
 
 
-// ===== 8. INFOGRÁFICO AMPLIADO =====
-// ao tocar no infográfico, ele abre grande numa janela (<dialog>)
+// ===== 8. IMAGEM AMPLIADA (infográfico e fotos da turma) =====
+// ao tocar num botão com data-ampliar="img/...", a imagem abre grande numa janela (<dialog>)
 var zoom = document.getElementById("zoom");
+var zoomImg = document.getElementById("zoomImg");
 
-document.getElementById("abrirInfo").onclick = function () { zoom.showModal(); };
-document.getElementById("fecharInfo").onclick = function () { zoom.close(); };
+document.querySelectorAll("[data-ampliar]").forEach(function (botao) {
+  botao.onclick = function () {
+    zoomImg.src = botao.dataset.ampliar;
+    zoomImg.alt = botao.querySelector("img").alt;
+    zoom.showModal();
+  };
+});
+document.getElementById("fecharZoom").onclick = function () { zoom.close(); };
 
 // fecha também ao clicar fora da imagem (no fundo escuro)
 zoom.addEventListener("click", function (e) {

@@ -486,6 +486,29 @@ html[data-tema="escuro"] .tema-btn .sol-ico { display: inline; }
 .card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(12, 51, 85, .12); }
 .card p { margin: 0; color: var(--tx2); }
 
+/* fotos da turma ("quem somos"): a do telão em cima, larga; as outras duas lado a lado */
+.turma { margin-top: 56px; }
+.turma-titulo { margin: 0 0 18px; text-align: center; }
+.fotos-turma {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.foto-turma {
+  display: block;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  overflow: hidden;
+  background: var(--branco);
+  box-shadow: var(--sombra);
+  cursor: zoom-in;
+}
+.foto-turma.larga { grid-column: 1 / -1; }
+.foto-turma img { display: block; width: 100%; height: auto; transition: transform .5s; }
+.foto-turma:hover img { transform: scale(1.03); }
+.turma .note { margin: 12px 0 0; text-align: center; }
+
 /* bolinha com ícone */
 .dot {
   display: grid;
@@ -1457,7 +1480,7 @@ html[data-tema="escuro"] .dp-credito { color: rgba(255, 255, 255, .5); }
 .leaflet-popup-content span { color: var(--tx3); }
 
 
-/* ===== 16. INFOGRÁFICO AMPLIADO ===== */
+/* ===== 16. IMAGEM AMPLIADA (infográfico e fotos da turma) ===== */
 .zoom {
   width: min(1200px, 96vw);
   max-height: 94vh;
@@ -1658,6 +1681,7 @@ footer p { margin: .3em 0; }
   .raios { width: 600px; height: 600px; margin: -300px 0 0 -300px; top: 22%; }
   .lead { font-size: 1.08rem; }
   .card, .quiz { padding: 20px; }
+  .fotos-turma { grid-template-columns: 1fr; }   /* no celular, uma foto embaixo da outra */
   /* linha do tempo em pé: bolinhas à esquerda */
   .tempo { grid-template-columns: 1fr; gap: 22px; text-align: left; }
   .tempo::before { top: 30px; bottom: 30px; left: 29px; right: auto; width: 3px; height: auto;
