@@ -38,7 +38,7 @@ var PAGINA_DE = {
   elnino: "elnino", "la-nina": "elnino", mundo: "elnino", brasil: "elnino", sc: "elnino",
   proteja: "proteja",
   doar: "doar", condicoes: "doar", "como-doar": "doar", duvidas: "doar",
-  materiais: "materiais",
+  materiais: "materiais", fluxo: "materiais",
   voluntario: "voluntario", formas: "voluntario", comecar: "voluntario", postura: "voluntario",
   pontos: "pontos"
 };
